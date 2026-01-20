@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>ZBARVIP - Official Theme</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Exo:100,400,700|Monoton" rel="stylesheet">
+  
+  <style>
+    body {
+        /* MODO POR DEFECTO: Mezcla de Negro, Morado, Rosa, Rojo y Plata */
+        background: linear-gradient(-45deg, #000000, #4b0082, #ff1493, #8b0000, #c0c0c0);
+        background-size: 400% 400%;
+        overflow: hidden;
+        font-family: 'Exo', sans-serif;
+        color: white;
+        height: 100vh;
+        margin: 0;
+        position: relative;
+        /* Animación del fondo */
+        animation: gradientBG 15s ease infinite;
+        transition: background-image 1s ease, color 1s ease;
+    }
+
+    @keyframes gradientBG {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+
+    /* Textura de brillitos (Stardust) */
+    body::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url('https://www.transparenttextures.com/patterns/stardust.png');
+        opacity: 0.6; /* Un poco más visible el brillo */
+        pointer-events: none;
+        z-index: 1;
+        mix-blend-mode: screen;
+    }
+
+    .but {
+        z-index: 1000;
+        position: absolute;
+        top: 9%; 
+        right: 5%;
+        background-color: rgba(0, 0, 0, 0.6);
+        border-radius: 50%;
+        border: 1px solid rgba(192, 192, 192, 0.5); /* Borde plateado */
+        color: #ffffff;
+        font-size: 16px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 35px;
+        height: 35px;
+    }
+        
+    .but:hover {
+        background-color: #ff1493; /* Rosa al pasar el mouse */
+        color: #fff;
+        box-shadow: 0 0 15px rgba(255, 20, 147, 0.8);
+        transform: scale(1.1) rotate(15deg);
+        border-color: #fff;
+    }
+
+    /* --- CONTENIDO DE TEXTO --- */
+    .context {
+        position: absolute;
+        top: 40vh; 
+        left: 10vw;
+        z-index: 10;
+        text-align: left;
+        width: 80%;
+    }
+
+    .context h1 {
+        font-family: 'Monoton', cursive;
+        font-weight: normal;
+        color: #fff;
+        font-size: 40px; /* Tamaño más grande para ZBARVIP */
+        margin-bottom: 10px;
+        /* Sombra de texto neón morada/rosa */
+        text-shadow: 0 0 10px rgba(255, 20, 147, 0.8), 0 0 30px rgba(75, 0, 130, 0.8);
+        line-height: 1;
+        transition: text-shadow 0.5s ease, color 0.5s ease;
+        letter-spacing: 2px;
+    }
+
+    .animtext {
+        font-size: 18px; 
+        color: rgba(255,255,255,0.95);
+        font-weight: 100;
+        margin-left: 5px;
+        position: relative;
+        height: 30px;
+        display: block;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+    }
+
+    /* Animaciones de letras */
+    .word { position: absolute; width: 100%; opacity: 0; left: 0;}
+    .letter { display: inline-block; position: relative; float: left; transform: translateZ(25px); transform-origin: 50% 50% 25px; }
+    
+    .letter.out { transform: rotateX(90deg); transition: transform 0.32s cubic-bezier(0.55, 0.055, 0.675, 0.19); }
+    .letter.behind { transform: rotateX(-90deg); }
+    .letter.in { transform: rotateX(0deg); transition: transform 0.38s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+    
+    /* Responsivo para móviles */
+    @media (max-width: 768px) {
+        .context h1 { font-size: 40px; }
+        .animtext { font-size: 18px; }
+    }
+  </style>
+</head>
+<body>
+
+<button class="but" onclick="Bgs()" title="Cambiar Tema de Color">
+    <i class="fas fa-moon   "></i>
+</button>
+
+<div class="context">
+    <h1>ZBARVIP</h1>
+    <div class="animtext">
+        <span class="word">Arriba, abajo, al centro y pa' dentro.</span>
+        <span class="word">Amor, alegría y un copazo.</span>
+        <span class="word">Necesito respiración boca a vodka.</span>
+        <span class="word">La cura de los males.</span>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+<script>
+    // --- Lógica de Temas (Colores solicitados: Morado, Rosa, Negro, Rojo, Plata) ---
+    var count = 0;
+    var n = 4; // Número de temas adicionales
+
+    function Bgs() {
+        var bgSize = "400% 400%";
+
+        if (count === 0) {
+            // TEMA 1: Dark Passion (Negro y Rojo intenso con toque Plata)
+            $('body').css({
+                'background-image': 'linear-gradient(-45deg, #000000, #3a0000, #8b0000, #2c2c2c)',
+                'background-size': bgSize
+            });
+            $('.context h1').css({
+                'color': '#ffaaaa', 
+                'text-shadow': '0 0 20px rgba(255, 0, 0, 0.8)'
+            });
+        } 
+        else if (count === 1) {
+            // TEMA 2: Cyber Punk (Rosa Neón, Morado y Negro)
+            $('body').css({
+                'background-image': 'linear-gradient(-45deg, #000000, #4b0082, #ff00ff, #1a0b2e)',
+                'background-size': bgSize
+            });
+            $('.context h1').css({
+                'color': '#fff', 
+                'text-shadow': '0 0 15px rgba(255, 0, 255, 0.9), 0 0 30px rgba(75, 0, 130, 0.9)'
+            });
+        } 
+        else if (count === 2) {
+            // TEMA 3: Silver Luxury (Plata, Gris y Blanco)
+            $('body').css({
+                'background-image': 'linear-gradient(-45deg, #2c3e50, #bdc3c7, #ecf0f1, #95a5a6)',
+                'background-size': bgSize,
+                'color': '#fff'
+            });
+            $('.context h1').css({
+                'color': '#fff', 
+                'text-shadow': '0 0 20px rgba(192, 192, 192, 0.9)'
+            });
+        } 
+        else if (count === 3) {
+            // TEMA 4: Vuelta al Mix Original (Todos los colores)
+            $('body').css({
+                'background-image': 'linear-gradient(-45deg, #000000, #4b0082, #ff1493, #8b0000, #c0c0c0)',
+                'background-size': bgSize
+            });
+            $('.context h1').css({
+                'color': 'white', 
+                'text-shadow': '0 0 10px rgba(255, 20, 147, 0.8), 0 0 30px rgba(75, 0, 130, 0.8)'
+            });
+        }
+
+        count += 1;
+        if (count === n) count = 0;
+    }
+
+    // --- Animación de Texto (Split Letters) ---
+    var words = document.getElementsByClassName('word');
+    var wordArray = [];
+    var currentWord = 0;
+
+    words[currentWord].style.opacity = 1;
+    for (var i = 0; i < words.length; i++) {
+        splitLetters(words[i]);
+    }
+
+    function changeWord() {
+        var cw = wordArray[currentWord];
+        var nw = currentWord == words.length-1 ? wordArray[0] : wordArray[currentWord+1];
+        for (var i = 0; i < cw.length; i++) {
+            animateLetterOut(cw, i);
+        }
+        for (var i = 0; i < nw.length; i++) {
+            nw[i].className = 'letter behind';
+            nw[0].parentElement.style.opacity = 1;
+            animateLetterIn(nw, i);
+        }
+        currentWord = (currentWord == wordArray.length-1) ? 0 : currentWord+1;
+    }
+
+    function animateLetterOut(cw, i) {
+        setTimeout(function() { cw[i].className = 'letter out'; }, i*80);
+    }
+    function animateLetterIn(nw, i) {
+        setTimeout(function() { nw[i].className = 'letter in'; }, 340+(i*80));
+    }
+    function splitLetters(word) {
+        var content = word.innerHTML;
+        word.innerHTML = '';
+        var letters = [];
+        for (var i = 0; i < content.length; i++) {
+            var letter = document.createElement('span');
+            letter.className = 'letter';
+            letter.innerHTML = content.charAt(i) === ' ' ? '&nbsp;' : content.charAt(i);
+            word.appendChild(letter);
+            letters.push(letter);
+        }
+        wordArray.push(letters);
+    }
+
+    setInterval(changeWord, 4000); // Cambia cada 4 segundos
+</script>
+</body>
+</html>
